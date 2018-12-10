@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="192.0" prefWidth="335.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.clientControllers.OrderServiceController">
+   <children>
+      <Button layoutX="237.0" layoutY="139.0" mnemonicParsing="false" onAction="#ActionConfirm" text="подтвердить" />
+      <ComboBox fx:id="dayWeek" layoutX="6.0" layoutY="83.0" prefWidth="150.0" promptText="день" />
+      <ComboBox fx:id="timeDay" layoutX="173.0" layoutY="83.0" prefWidth="150.0" promptText="время" />
+      <Label layoutX="34.0" layoutY="34.0" text="Выбор времени и дня" />
+   </children>
+</AnchorPane>
