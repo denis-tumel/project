@@ -304,9 +304,9 @@ public class LoaderStage{
                 paidStage.setScene(scene);
                 paidStage.initModality(Modality.WINDOW_MODAL);
                 paidStage.initOwner(clientStage);
-                paidServicesController = (PaidServicesController) loader.getController();
+                //paidServicesController = (PaidServicesController) loader.getController();
             }
-            paidServicesController.setInformation();
+            //paidServicesController.setInformation();
             paidStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
