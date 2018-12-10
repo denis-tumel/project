@@ -1,0 +1,22 @@
+#VBoxLogin{
+    -fx-background-image: url("../images/login-image.jpg");
+}
+
+#VBoxRegister{
+    -fx-background-image: url("../images/register-image.jpg");
+}
+
+#VBoxMainView{
+    -fx-background-image: url("../images/main-client-view.jpg");
+}
+
+#header{
+    -fx-background-color: #5BC2D0;
+}
+
+#body{
+    -fx-background-color: #63b6ba;
+}
+#footer{
+    -fx-background-color: #5BC2D0;
+}

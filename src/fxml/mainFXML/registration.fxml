@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane id="VBoxRegister" prefHeight="597.0" prefWidth="600.0" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.mainControllers.RegistrationController">
+   <children>
+      <AnchorPane prefHeight="597.0" prefWidth="600.0">
+         <children>
+            <Button defaultButton="true" layoutX="161.0" layoutY="421.0" mnemonicParsing="false" onAction="#ActionRegister" prefHeight="32.0" prefWidth="102.0" text="%key.main.register" AnchorPane.bottomAnchor="144.0">
+               <font>
+                  <Font name="Sitka Small" size="12.0" />
+               </font></Button>
+            <TextField fx:id="firstName" layoutX="140.0" layoutY="164.0" prefHeight="40.0" prefWidth="143.0" promptText="%key.main.name" AnchorPane.leftAnchor="140.0" AnchorPane.rightAnchor="317.0" />
+            <Button cancelButton="true" layoutY="2.0" mnemonicParsing="false" onAction="#ActionBack" prefHeight="25.0" prefWidth="60.0" text="%key.main.back">
+               <font>
+                  <Font name="Simplex" size="12.0" />
+               </font></Button>
+            <Label layoutX="190.0" layoutY="101.0" text="%key.main.register">
+               <font>
+                  <Font name="System Bold" size="36.0" />
+               </font>
+            </Label>
+            <TextField fx:id="emailField" layoutX="140.0" layoutY="232.0" prefHeight="40.0" prefWidth="320.0" promptText="%key.main.email" />
+            <PasswordField fx:id="passwordField" layoutX="140.0" layoutY="290.0" prefHeight="40.0" prefWidth="320.0" promptText="%key.main.password" />
+            <PasswordField fx:id="confirmPassword" layoutX="140.0" layoutY="355.0" prefHeight="40.0" prefWidth="320.0" promptText="%key.main.confirmPassword" />
+            <TextField fx:id="lastName" layoutX="317.0" layoutY="164.0" prefHeight="40.0" prefWidth="143.0" promptText="%key.main.surname" />
+            <Label layoutX="289.0" layoutY="428.0" text="%key.main.haveAcount?" />
+            <Button layoutX="404.0" layoutY="425.0" mnemonicParsing="false" onAction="#ActionLogin" text="%key.main.login" />
+         </children>
+      </AnchorPane>
+   </children>
+</Pane>
