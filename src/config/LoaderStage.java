@@ -29,7 +29,9 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class LoaderStage{
+import static config.Const.PATH_ORDER_PAID;
+
+public class LoaderStage {
     private static AdminController adminController;
     private static EditDoctorController editDoctorController;
     private static DoctorController doctorController;
@@ -41,6 +43,7 @@ public class LoaderStage{
     private static MainController mainController;
     private static Parent root;
     private static Scene scene;
+    private static Stage orderPaidServiceStage;
     private static Stage usersStage;
     private static Stage paidStage;
     private static Stage addPaidStage;
@@ -54,6 +57,7 @@ public class LoaderStage{
     private static Stage editDoctorStage;
     private static Stage viewStage;
     LocaleManager localeManager = new LocaleManager();
+
     public static void mainView(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -332,6 +336,24 @@ public class LoaderStage{
         }
     }
 
+    public static void viewPaidServices() {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        try {
+            if(orderPaidServiceStage == null){
+                fxmlLoader.setLocation(LoaderStage.class.getResource(PATH_ORDER_PAID));
+                root = fxmlLoader.load();
+                scene = new Scene(root);
+                orderPaidServiceStage = new Stage();
+                orderPaidServiceStage.setTitle("заказ платной услуги");
+                orderPaidServiceStage.setScene(scene);
+            }
+            orderPaidServiceStage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void eventCloseClient(Stage stage) {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
@@ -427,4 +449,6 @@ public class LoaderStage{
     public static ClientController getClientController() {
         return clientController;
     }
+
+
 }

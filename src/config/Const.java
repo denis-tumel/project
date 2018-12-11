@@ -27,6 +27,7 @@ public class Const {
     public static final int BLOCK_USERS = -1;
     public static final int UNLOCK_USERS = 2;
     public static final String PAID_TABLE = "paidServices";
+    public static final String PATH_ORDER_PAID = "../fxml/clientFXML/orderPaidService.fxml";
     static final String PATH_USERS_VIEW = "../fxml/adminFXML/viewUsers.fxml";
     static final String PATH_ADD_PAID_SERVICES = "../fxml/adminFXML/addPaidServices.fxml";
     static final String PATH_PAID_SERVICES = "../fxml/clientFXML/paidServicesView.fxml";

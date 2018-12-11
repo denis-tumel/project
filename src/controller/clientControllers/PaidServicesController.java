@@ -1,5 +1,6 @@
 package controller.clientControllers;
 
+import config.LoaderStage;
 import interfacese.impls.CollectionServices;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +15,6 @@ import javafx.stage.Stage;
 import objects.Service;
 
 import java.io.IOException;
-import java.util.ResourceBundle;
 
 public class PaidServicesController {
     @FXML
@@ -27,11 +27,7 @@ public class PaidServicesController {
     private TableColumn<Service, String> price;
 
     private CollectionServices collectionServices = new CollectionServices();
-    private FXMLLoader fxmlLoader = new FXMLLoader();
-    private final String PATH_ORDER_PAID = "../../fxml/clientFXML/orderPaidService.fxml";
-    private Parent orderPaidFxml;
-    private Stage orderPaidServiceStage;
-    private Scene scene;
+
     @FXML
     public void initialize(){
         service.setCellValueFactory(new PropertyValueFactory<Service, String>("nameServices"));
@@ -45,12 +41,7 @@ public class PaidServicesController {
     }
 
     public void ActionConfirm(ActionEvent actionEvent) throws IOException {
-        fxmlLoader.setLocation(getClass().getResource(PATH_ORDER_PAID));
-        orderPaidFxml = fxmlLoader.load();
-        scene = new Scene(orderPaidFxml);
-        orderPaidServiceStage = new Stage();
-        orderPaidServiceStage.setTitle("заказ платной услуги");
-        orderPaidServiceStage.setScene(scene);
+        LoaderStage.viewPaidServices();
     }
 
 }
