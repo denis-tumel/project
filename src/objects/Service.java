@@ -9,6 +9,8 @@ public class Service implements Serializable {
     private String priceServices;
     private int id;
     private int doctorID;
+    private String day;
+    private String time;
 
     public String getNameServices() {
         return nameServices;
@@ -49,5 +51,21 @@ public class Service implements Serializable {
 
     public void setDoctorID(int doctorID) {
         this.doctorID = doctorID;
+    }
+
+    public String getDay(){
+        return day;
+    }
+
+    public void setDay(String day) {
+        this.day = day;
+    }
+
+    public String getTime(){
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 }

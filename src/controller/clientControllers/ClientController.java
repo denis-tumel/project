@@ -75,6 +75,6 @@ public class ClientController {
     }
 
     public void ActionViewPaidServices(ActionEvent actionEvent) {
-        LoaderStage.paidServicesStage();
+        LoaderStage.paidServicesStage(user);
     }
 }

@@ -11,6 +11,7 @@ public class Const {
     public static final String SCHEDULE_COUNT_TICKET = "countTicket";
     public static final String SCHEDULE_DOCTOR_ID = "doctor_id";
     public static final String USERS_ID = "id";
+    public static final String ORDER_PAID_SERVICE = "order_paid_service";
     public static final String USERS_NAME = "name";
     public static final String USERS_SURNAME = "surname";
     public static final String USERS_EMAIL = "email";
@@ -27,7 +28,8 @@ public class Const {
     public static final int BLOCK_USERS = -1;
     public static final int UNLOCK_USERS = 2;
     public static final String PAID_TABLE = "paidServices";
-    static final String PATH_ORDER_PAID = "../fxml/clientFXML/orderPaidService.fxml";
+    public static final String PAID_SERVICES = "paidServices";
+    public static final String SERVICES_ID = "services_id";
     static final String PATH_ORDER_CONFIRM = "../fxml/clientFXML/orderConfirmService.fxml";
     static final String PATH_USERS_VIEW = "../fxml/adminFXML/viewUsers.fxml";
     static final String PATH_ADD_PAID_SERVICES = "../fxml/adminFXML/addPaidServices.fxml";
@@ -42,5 +44,4 @@ public class Const {
     static final String PATH_DOCTOR_STAGE = "../fxml/doctorFXML/doctorView.fxml";
     static final String PATH_ADMIN_STAGE = "../fxml/adminFXML/adminView.fxml";
     static final String PATH_ADD_DOCTOR = "../fxml/adminFXML/editDoctorView.fxml";
-    static final String PATH_SCHEDULE = "../fxml/adminFXML/editScheduleDoctorView.fxml";
 }

@@ -497,5 +497,23 @@ public class DatabaseHandler extends Mysql {
             e.printStackTrace();
         }
     }
+
+    public static void orderService(ObjMessage objMessage) {
+        try {
+            System.out.println("я тут");
+            String sql;
+            sql = "INSERT INTO " + Const.PAID_SERVICES + "( " + Const.SERVICES_ID+ ", " + Const.ORDER_DAY + ", " + Const.ORDER_TIME + ", " + Const.ORDER_USER_ID + ") " +
+                    " VALUES ( ? , ? , ? , ? ) ";
+            preparedStatement = connect().prepareStatement(sql);
+            preparedStatement.setInt(1, objMessage.getServiceObject().getId());
+            preparedStatement.setString(2, objMessage.getServiceObject().getDay());
+            preparedStatement.setString(3, objMessage.getServiceObject().getTime());
+            preparedStatement.setInt(4, objMessage.getUserObject().getId());
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
 

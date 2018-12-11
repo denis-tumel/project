@@ -31,9 +31,8 @@ public class LoaderStage {
     private static ClientController clientController;
     private static InformationViewController informationViewController;
     private static OrderController orderController;
-    private static OrderServiceController orderServiceController;
     private static PaidServicesController paidServicesController;
-    private static OrderConfirmServiceController orderConfitmServiceController;
+    private static OrderConfirmServiceController orderConfirmServiceController;
     private static MainController mainController;
     private static Parent root;
     private static Scene scene;
@@ -291,7 +290,7 @@ public class LoaderStage {
         }
     }
 
-    public static void paidServicesStage() {
+    public static void paidServicesStage(User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
             if (paidStage == null) {
@@ -299,13 +298,14 @@ public class LoaderStage {
                 root = loader.load();
                 scene = new Scene(root);
                 paidStage = new Stage();
+                setPaidStage(paidStage);
                 paidStage.setTitle("Платные услуги");
                 paidStage.setScene(scene);
                 paidStage.initModality(Modality.WINDOW_MODAL);
                 paidStage.initOwner(clientStage);
-                //paidServicesController = (PaidServicesController) loader.getController();
+                paidServicesController = (PaidServicesController) loader.getController();
             }
-            //paidServicesController.setInformation();
+            paidServicesController.setInformation(user);
             paidStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -331,27 +331,7 @@ public class LoaderStage {
         }
     }
 
-    public static void viewPaidServices(Service service) {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        try {
-            if(orderPaidServiceStage == null){
-                fxmlLoader.setLocation(LoaderStage.class.getResource(Const.PATH_ORDER_PAID));
-                root = fxmlLoader.load();
-                scene = new Scene(root);
-                orderPaidServiceStage = new Stage();
-                orderPaidServiceStage.setTitle("заказ платной услуги");
-                orderPaidServiceStage.setScene(scene);
-                orderServiceController = fxmlLoader.getController();
-            }
-            orderServiceController.setInformation(service);
-            orderPaidServiceStage.showAndWait();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static void viewConfirmOrderService(Service service, String day, String time) {
+    public static void viewConfirmOrderService(Service service, String day, String time, User user) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {
             if(orderConfirmServiceStage == null){
@@ -359,11 +339,12 @@ public class LoaderStage {
                 root = fxmlLoader.load();
                 scene = new Scene(root);
                 orderConfirmServiceStage = new Stage();
+                setOrderConfirmServiceStage(orderConfirmServiceStage);
                 orderConfirmServiceStage.setTitle("заказ платной услуги");
                 orderConfirmServiceStage.setScene(scene);
-                orderConfitmServiceController = fxmlLoader.getController();
+                orderConfirmServiceController = fxmlLoader.getController();
             }
-            orderConfitmServiceController.setInformation(service, day, time);
+            orderConfirmServiceController.setInformation(service, day, time, user);
             orderConfirmServiceStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
@@ -464,5 +445,21 @@ public class LoaderStage {
 
     public static ClientController getClientController() {
         return clientController;
+    }
+
+    public static Stage getPaidStage() {
+        return paidStage;
+    }
+
+    public static void setPaidStage(Stage paidStage) {
+        LoaderStage.paidStage = paidStage;
+    }
+
+    public static Stage getOrderConfirmServiceStage() {
+        return orderConfirmServiceStage;
+    }
+
+    public static void setOrderConfirmServiceStage(Stage orderConfirmServiceStage) {
+        LoaderStage.orderConfirmServiceStage = orderConfirmServiceStage;
     }
 }

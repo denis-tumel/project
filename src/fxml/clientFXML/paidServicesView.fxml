@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="317.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.clientControllers.PaidServicesController">
+<AnchorPane prefHeight="400.0" prefWidth="478.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.clientControllers.PaidServicesController">
    <children>
-      <Label layoutX="109.0" layoutY="41.0" text="Платные услуги" />
-      <TableView fx:id="tableViewServices" layoutX="48.0" layoutY="93.0" prefHeight="200.0" prefWidth="208.0">
+      <Label layoutX="169.0" layoutY="21.0" text="Платные услуги" AnchorPane.leftAnchor="169.0" AnchorPane.rightAnchor="168.0" AnchorPane.topAnchor="21.0">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <TableView fx:id="tableViewServices" layoutX="32.0" layoutY="118.0" prefHeight="233.0" prefWidth="208.0">
         <columns>
           <TableColumn fx:id="service" prefWidth="75.0" text="услуга" />
           <TableColumn fx:id="doctor" prefWidth="75.0" text="доктор" />
@@ -20,6 +25,10 @@
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="116.0" layoutY="316.0" mnemonicParsing="false" onAction="#ActionConfirm" text="оформить" />
+      <Button layoutX="320.0" layoutY="318.0" mnemonicParsing="false" onAction="#ActionConfirm" text="оформить" />
+      <ComboBox fx:id="day" layoutX="281.0" layoutY="118.0" prefWidth="150.0" promptText="день" />
+      <ComboBox fx:id="time" layoutX="281.0" layoutY="188.0" prefWidth="150.0" promptText="время" />
+      <Separator layoutX="131.0" layoutY="66.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="66.0" />
+      <Label layoutX="94.0" layoutY="84.0" text="выбор услуги" />
    </children>
 </AnchorPane>

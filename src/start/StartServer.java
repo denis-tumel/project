@@ -147,6 +147,9 @@ public class StartServer extends Thread {
                                 case "delete_service":
                                     DatabaseHandler.deleteServices(objMessage);
                                     break;
+                                case "order_paid_service":
+                                    DatabaseHandler.orderService(objMessage);
+                                    break;
                             }
                             break;
                     }
