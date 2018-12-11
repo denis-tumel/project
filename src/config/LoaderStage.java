@@ -2,18 +2,12 @@ package config;
 
 import controller.adminControllers.EditDoctorController;
 import controller.adminControllers.AddPaidServicesController;
-import controller.clientControllers.InformationViewController;
-import controller.clientControllers.OrderController;
-import controller.clientControllers.PaidServicesController;
+import controller.clientControllers.*;
 import controller.mainControllers.MainController;
-import interfacese.impls.CollectionDoctors;
-import javafx.collections.ObservableList;
-import javafx.scene.layout.AnchorPane;
 import objects.Doctor;
-import objects.Lang;
+import objects.Service;
 import start.StartClient;
 import controller.adminControllers.AdminController;
-import controller.clientControllers.ClientController;
 import controller.doctorControllers.DoctorController;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -29,8 +23,6 @@ import java.io.IOException;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import static config.Const.PATH_ORDER_PAID;
-
 public class LoaderStage {
     private static AdminController adminController;
     private static EditDoctorController editDoctorController;
@@ -39,11 +31,14 @@ public class LoaderStage {
     private static ClientController clientController;
     private static InformationViewController informationViewController;
     private static OrderController orderController;
+    private static OrderServiceController orderServiceController;
     private static PaidServicesController paidServicesController;
+    private static OrderConfirmServiceController orderConfitmServiceController;
     private static MainController mainController;
     private static Parent root;
     private static Scene scene;
     private static Stage orderPaidServiceStage;
+    private static Stage orderConfirmServiceStage;
     private static Stage usersStage;
     private static Stage paidStage;
     private static Stage addPaidStage;
@@ -336,19 +331,40 @@ public class LoaderStage {
         }
     }
 
-    public static void viewPaidServices() {
+    public static void viewPaidServices(Service service) {
         FXMLLoader fxmlLoader = new FXMLLoader();
         try {
             if(orderPaidServiceStage == null){
-                fxmlLoader.setLocation(LoaderStage.class.getResource(PATH_ORDER_PAID));
+                fxmlLoader.setLocation(LoaderStage.class.getResource(Const.PATH_ORDER_PAID));
                 root = fxmlLoader.load();
                 scene = new Scene(root);
                 orderPaidServiceStage = new Stage();
                 orderPaidServiceStage.setTitle("заказ платной услуги");
                 orderPaidServiceStage.setScene(scene);
+                orderServiceController = fxmlLoader.getController();
             }
+            orderServiceController.setInformation(service);
             orderPaidServiceStage.showAndWait();
 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void viewConfirmOrderService(Service service, String day, String time) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        try {
+            if(orderConfirmServiceStage == null){
+                fxmlLoader.setLocation(LoaderStage.class.getResource(Const.PATH_ORDER_CONFIRM));
+                root = fxmlLoader.load();
+                scene = new Scene(root);
+                orderConfirmServiceStage = new Stage();
+                orderConfirmServiceStage.setTitle("заказ платной услуги");
+                orderConfirmServiceStage.setScene(scene);
+                orderConfitmServiceController = fxmlLoader.getController();
+            }
+            orderConfitmServiceController.setInformation(service, day, time);
+            orderConfirmServiceStage.showAndWait();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -449,6 +465,4 @@ public class LoaderStage {
     public static ClientController getClientController() {
         return clientController;
     }
-
-
 }

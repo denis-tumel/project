@@ -41,7 +41,8 @@ public class PaidServicesController {
     }
 
     public void ActionConfirm(ActionEvent actionEvent) throws IOException {
-        LoaderStage.viewPaidServices();
+        Service service = (Service) tableViewServices.getSelectionModel().getSelectedItem();
+        LoaderStage.viewPaidServices(service);
     }
 
 }
