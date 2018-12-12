@@ -1,6 +1,6 @@
-package DB;
+package db;
 
-import DB.Base.Mysql;
+import db.Base.Mysql;
 import config.Const;
 import model.ObjMessage;
 import objects.Doctor;

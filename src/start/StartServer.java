@@ -1,6 +1,6 @@
 package start;
 
-import DB.DatabaseHandler;
+import db.DatabaseHandler;
 import config.Const;
 import model.ObjMessage;
 import objects.Doctor;

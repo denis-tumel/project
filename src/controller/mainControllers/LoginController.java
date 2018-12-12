@@ -10,6 +10,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import objects.User;
+import utils.DialogManager;
+
 import java.io.IOException;
 import java.util.Optional;
 
@@ -60,6 +62,7 @@ public class LoginController implements Validation {
                         LoaderStage.getAuthenticationStage().close();
                         viewAdminStage(user);
                         showInformation();
+                        clearField();
                         break;
                     case 2:
                         LoaderStage.getAuthenticationStage().close();
@@ -76,8 +79,10 @@ public class LoginController implements Validation {
                         clearField();
                         break;
                 }
-            } else
+            } else{
                 errLogin();
+                clearField();
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -90,10 +95,7 @@ public class LoginController implements Validation {
     }
 
     private void viewBlockException(User user) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setContentText(user.getFirstName()+" вы заблокированы!");
-        alert.showAndWait();
+        DialogManager.showErrorDialog("ошибка", user.getFirstName()+" вы заблокированы!");
     }
 
     private void viewDoctorStage(User user) {
@@ -109,34 +111,15 @@ public class LoginController implements Validation {
     }
 
     private void showInformation() {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setHeaderText(null);
-        alert.setContentText("Авторизация прошла успешно!");
-        Optional<ButtonType> option = alert.showAndWait();
-
-        if (option.get() == ButtonType.OK) {
-            emailField.clear();
-            passwordField.clear();
-        }
+        DialogManager.showInfoDialog("инфо", "Авторизация прошла успешно!");
     }
 
     private void errLogin() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setContentText("Непрвильный логин или пароль!");
-        Optional<ButtonType> option = alert.showAndWait();
-
-        if (option.get() == ButtonType.OK) {
-            emailField.clear();
-            passwordField.clear();
-        }
+        DialogManager.showErrorDialog("ошибка", "Непрвильный логин или пароль!");
     }
 
     private void errFillFields() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setContentText("Заполните все поля!");
-        alert.show();
+        DialogManager.showErrorDialog("ошибка", "Заполните все поля!");
     }
 
     @Override

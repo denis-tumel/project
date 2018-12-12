@@ -12,6 +12,7 @@ import objects.Doctor;
 import objects.Service;
 import objects.User;
 import start.StartClient;
+import utils.DialogManager;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -50,16 +51,9 @@ public class OrderConfirmServiceController {
         try {
             StartClient.getOutputStream().writeObject(objMessage);
             StartClient.getOutputStream().flush();
-
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Заказ успешно оформлен!");
-            Optional<ButtonType> option = alert.showAndWait();
-            if (option.get() == ButtonType.OK) {
-                LoaderStage.getOrderConfirmServiceStage().close();
-                LoaderStage.getClientStage().show();
-            }
-
+            DialogManager.showInfoDialog("инфо", "Заказ успешно оформлен!");
+            LoaderStage.getOrderConfirmServiceStage().close();
+            LoaderStage.getClientStage().show();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import objects.User;
+import utils.DialogManager;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -48,22 +49,11 @@ public class RegistrationController implements Validation {
 
             if(user.getError().equals("")){
                 LoaderStage.getRegistrationStage().close();
-
                 new LoginController().viewClientStage(user , "REGISTER");
-
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Регистрация прошла успешно!");
-                Optional<ButtonType> option = alert.showAndWait();
-
-                if (option.get() == ButtonType.OK) {
-                    clearField(firstName, lastName, emailField, passwordField, confirmPassword);
-                }
+                DialogManager.showInfoDialog("инфо", "Регистрация прошла успешно!");
+                clearField(firstName, lastName, emailField, passwordField, confirmPassword);
             }else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText(user.getError());
-                alert.show();
+                DialogManager.showErrorDialog("ошибка", user.getError());
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -79,10 +69,7 @@ public class RegistrationController implements Validation {
     }
 
     private void errFillFields() {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText(null);
-        alert.setContentText("Заполните все поля!");
-        alert.show();
+        DialogManager.showErrorDialog("ошибка", "Заполните все поля!");
     }
 
     public void ActionBack(ActionEvent actionEvent) {

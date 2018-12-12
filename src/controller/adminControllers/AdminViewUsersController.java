@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import model.ObjMessage;
 import objects.User;
 import start.StartClient;
+import utils.DialogManager;
 
 import java.io.IOException;
 
@@ -69,16 +70,14 @@ public class AdminViewUsersController {
             case "block":
                 if (selectedUser != null)
                     blockUser(selectedUser);
-                else {
-                    showAlertInformation(Alert.AlertType.ERROR, "Выберите пользователя из таблицы!");
-                }
+                else
+                    DialogManager.showErrorDialog("ошибка", "Выберите пользователя из таблицы!");
                 break;
             case "unlock":
                 if (selectedUser != null)
                     unlockUser(selectedUser);
-                else {
-                    showAlertInformation(Alert.AlertType.ERROR,"Выберите пользователся из таблицы!");
-                }
+                else
+                    DialogManager.showErrorDialog("ошибка", "Выберите пользователя из таблицы!");
                 break;
         }
     }
@@ -94,7 +93,7 @@ public class AdminViewUsersController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showAlertInformation(Alert.AlertType.INFORMATION, "Пользоваетль заблокирован!");
+        DialogManager.showInfoDialog("инфо", "Пользователь заблокирован!");
         refreshTable();
     }
 
@@ -109,7 +108,7 @@ public class AdminViewUsersController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showAlertInformation(Alert.AlertType.INFORMATION, "Пользоваетль разблокирован!");
+        DialogManager.showInfoDialog("инфо", "Пользователь разаблокирован!");
         refreshTable();
     }
 
@@ -120,12 +119,5 @@ public class AdminViewUsersController {
         objMessage.setUserObject(user);
 
         return objMessage;
-    }
-
-    public void showAlertInformation(Alert.AlertType error, String s) {
-        Alert alert = new Alert(error);
-        alert.setHeaderText(null);
-        alert.setContentText(s);
-        alert.showAndWait();
     }
 }

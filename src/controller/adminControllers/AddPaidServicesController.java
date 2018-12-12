@@ -14,6 +14,7 @@ import model.ObjMessage;
 import objects.Doctor;
 import objects.Service;
 import start.StartClient;
+import utils.DialogManager;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public class AddPaidServicesController {
                 if(selectedService != null)
                     delete(selectedService);
                 else{
-                    showAlertInformation(Alert.AlertType.ERROR, "Выберите сервис из таблицы!");
+                    DialogManager.showErrorDialog("ошибка", "Выберите серивс из таблицы!");
                 }
                 break;
         }
@@ -125,13 +126,6 @@ public class AddPaidServicesController {
             e.printStackTrace();
         }
         refreshTable();
-    }
-
-    public void showAlertInformation(Alert.AlertType error, String s) {
-        Alert alert = new Alert(error);
-        alert.setHeaderText(null);
-        alert.setContentText(s);
-        alert.showAndWait();
     }
 
     private ObjMessage createObjMessage(Doctor selectedDoctor) {

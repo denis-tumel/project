@@ -10,6 +10,7 @@ import model.ObjMessage;
 import objects.Doctor;
 import objects.User;
 import start.StartClient;
+import utils.DialogManager;
 
 import java.io.IOException;
 import java.util.Observable;
@@ -71,25 +72,16 @@ public class AdminController implements Observer {
             case "btnEdit":
                 if(selectedDoctor!=null)
                     editDoctor(selectedDoctor);
-                else{
-                    showAlertInformation(Alert.AlertType.ERROR, "Выберите доктора из таблицы!");
-                }
+                else
+                    DialogManager.showErrorDialog("ошибка", "Выберите доктора из таблицы!");
                 break;
             case "btnDelete":
                 if(selectedDoctor!=null)
                     deleteDoctor(selectedDoctor);
-                else{
-                    showAlertInformation(Alert.AlertType.ERROR, "Выберите доктора из таблицы!");
-                }
+                else
+                    DialogManager.showErrorDialog("ошибка", "Выберите доктора из таблицы!");
                 break;
         }
-    }
-
-    public void showAlertInformation(Alert.AlertType error, String s) {
-        Alert alert = new Alert(error);
-        alert.setHeaderText(null);
-        alert.setContentText(s);
-        alert.showAndWait();
     }
 
     private void deleteDoctor(Doctor selectedDoctor) {
@@ -143,7 +135,7 @@ public class AdminController implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        showAlertInformation(Alert.AlertType.INFORMATION, "Обновление прошло успешно!");
+        DialogManager.showInfoDialog("инфо", "Обновление прошло успешно!");
     }
 
     public void ActionViewUsers(ActionEvent actionEvent) {

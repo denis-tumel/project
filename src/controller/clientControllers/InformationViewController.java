@@ -10,6 +10,7 @@ import model.ObjMessage;
 import objects.Doctor;
 import objects.User;
 import start.StartClient;
+import utils.DialogManager;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -32,26 +33,18 @@ public class InformationViewController {
 
             objMessage = (ObjMessage) StartClient.getInputStream().readObject();
             if (objMessage.getOrderTicket().getFlag()) {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setHeaderText(null);
-                alert.setContentText("Заказ успешно оформлен!");
-                Optional<ButtonType> option = alert.showAndWait();
+                DialogManager.showInfoDialog("инфо", "Заказ успешно оформлен!");
                 user.setId(objMessage.getOrderTicket().getUserID());
-                if (option.get() == ButtonType.OK) {
-                    LoaderStage.getViewStage().close();
-                    LoaderStage.getClientController().setInformation(user);
-                    LoaderStage.getClientStage().show();
-                }
-            } else {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText(null);
-                alert.setContentText("На этот день талоны закончились, выбирите другой день!");
-                Optional<ButtonType> option = alert.showAndWait();
 
-                if (option.get() == ButtonType.OK) {
-                    LoaderStage.getViewStage().close();
-                    LoaderStage.getOrderStage().show();
-                }
+                LoaderStage.getViewStage().close();
+                LoaderStage.getClientController().setInformation(user);
+                LoaderStage.getClientStage().show();
+            } else {
+                DialogManager.showErrorDialog("ошибка", "На этот день талоны закончились, выберите другой день!");
+
+                LoaderStage.getViewStage().close();
+                LoaderStage.getOrderStage().show();
+
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

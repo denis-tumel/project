@@ -34,10 +34,8 @@ public class MainController extends Observable implements Initializable {
         comboBoxLocale.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
                 Lang selectedLang = (Lang) comboBoxLocale.getSelectionModel().getSelectedItem();
                 LocaleManager.setCurrentLang(selectedLang);
-
             }
         });
     }
