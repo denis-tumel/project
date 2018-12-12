@@ -47,6 +47,7 @@ public class OrderConfirmServiceController {
 
     public void ActionConfirm(ActionEvent actionEvent) {
         objMessage = createObjMessage();
+        System.out.println(objMessage.getDoctorObject().getDay());
         System.out.println(objMessage.getUserObject().getType());
         try {
             StartClient.getOutputStream().writeObject(objMessage);

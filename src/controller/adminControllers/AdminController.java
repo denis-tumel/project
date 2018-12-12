@@ -49,7 +49,7 @@ public class AdminController implements Observer {
 
     public void ActionLogout(ActionEvent actionEvent) {
         LoaderStage.getAdminStage().close();
-        LoaderStage.getMainStage().show();
+        LoaderStage.getAuthenticationStage().show();
     }
 
     public void setInformation(User user) {

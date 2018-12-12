@@ -271,6 +271,7 @@ public class DatabaseHandler extends Mysql {
 
     public static ObjMessage checkout(ObjMessage objMessage) {
         try {
+
             String sql = "SELECT * FROM " + Const.SCHEDULE_TABLE + " WHERE " + Const.SCHEDULE_NAME_DAY + " = ? AND " + Const.SCHEDULE_DOCTOR_ID + " = ?";
             preparedStatement = connect().prepareStatement(sql);
             preparedStatement.setString(1, objMessage.getDoctorObject().getDay());
@@ -306,6 +307,7 @@ public class DatabaseHandler extends Mysql {
                     sql = "INSERT INTO " + Const.ORDER_COUPONE + "( " + Const.ORDER_DAY + ", " + Const.ORDER_TIME + ", " + Const.ORDER_USER_ID + ", " + Const.ORDER_DOCTOR_ID +", " + Const.ORDER_NUMBER_TICKET + ") " +
                             " VALUES ( ? , ? , ? , ? , ?) ";
                     preparedStatement = connect().prepareStatement(sql);
+                    System.out.println(objMessage.getDoctorObject().getDay());
                     preparedStatement.setString(1, objMessage.getDoctorObject().getDay());
                     preparedStatement.setString(2, partOne+" : "+partTwo);
                     preparedStatement.setInt(3, objMessage.getUserObject().getId());
@@ -486,6 +488,7 @@ public class DatabaseHandler extends Mysql {
     public static void orderService(ObjMessage objMessage) {
         try {
             System.out.println("я тут");
+            System.out.println(objMessage.getDoctorObject().getDay());
             String sql;
             sql = "INSERT INTO " + Const.PAID_SERVICES + "( " + Const.SERVICES_ID+ ", " + Const.ORDER_DAY + ", " + Const.ORDER_TIME + ", " + Const.ORDER_USER_ID + ") " +
                     " VALUES ( ? , ? , ? , ? ) ";

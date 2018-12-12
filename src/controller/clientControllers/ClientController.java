@@ -61,7 +61,7 @@ public class ClientController {
 
     public void ActionLogout(ActionEvent actionEvent) {
         LoaderStage.getClientStage().close();
-        LoaderStage.getMainStage().show();
+        LoaderStage.getAuthenticationStage().show();
     }
 
     public void setInformation(User user) {

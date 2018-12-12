@@ -3,8 +3,11 @@ package config;
 import controller.adminControllers.EditDoctorController;
 import controller.adminControllers.AddPaidServicesController;
 import controller.clientControllers.*;
+import controller.doctorControllers.PieChartController;
 import controller.mainControllers.MainController;
+import javafx.collections.ObservableList;
 import objects.Doctor;
+import objects.OrderTicket;
 import objects.Service;
 import start.StartClient;
 import controller.adminControllers.AdminController;
@@ -33,6 +36,7 @@ public class LoaderStage {
     private static OrderController orderController;
     private static PaidServicesController paidServicesController;
     private static OrderConfirmServiceController orderConfirmServiceController;
+    private static PieChartController pieChartController;
     private static MainController mainController;
     private static Parent root;
     private static Scene scene;
@@ -50,6 +54,7 @@ public class LoaderStage {
     private static Stage adminStage;
     private static Stage editDoctorStage;
     private static Stage viewStage;
+    private static Stage viewPieStage;
     LocaleManager localeManager = new LocaleManager();
 
     public static void mainView(Stage primaryStage) {
@@ -351,6 +356,26 @@ public class LoaderStage {
         }
     }
 
+    public static void viewPie(ObservableList<OrderTicket> items) {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        try {
+            if(viewPieStage == null){
+                fxmlLoader.setLocation(LoaderStage.class.getResource(Const.PATH_PIE));
+                root = fxmlLoader.load();
+                scene = new Scene(root);
+                viewPieStage = new Stage();
+                setViewPieStage(viewPieStage);
+                viewPieStage.setTitle("круговая диаграмма");
+                viewPieStage.setScene(scene);
+                pieChartController = fxmlLoader.getController();
+            }
+            pieChartController.setInformation(items);
+            viewPieStage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     private static void eventCloseClient(Stage stage) {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
             public void handle(WindowEvent we) {
@@ -461,5 +486,13 @@ public class LoaderStage {
 
     public static void setOrderConfirmServiceStage(Stage orderConfirmServiceStage) {
         LoaderStage.orderConfirmServiceStage = orderConfirmServiceStage;
+    }
+
+    public static Stage getViewPieStage() {
+        return viewPieStage;
+    }
+
+    public static void setViewPieStage(Stage viewPieStage) {
+        LoaderStage.viewPieStage = viewPieStage;
     }
 }

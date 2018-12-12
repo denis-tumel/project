@@ -13,7 +13,6 @@ import start.StartClient;
 import utils.DialogManager;
 
 import java.io.IOException;
-import java.util.Optional;
 
 public class InformationViewController {
     @FXML
@@ -28,6 +27,7 @@ public class InformationViewController {
     public void ActionAccess(ActionEvent actionEvent) {
         objMessage = createObjMessage(user, doctor);
         try {
+            System.out.println( objMessage.getDoctorObject().getDay());
             StartClient.getOutputStream().writeObject(objMessage);
             StartClient.getOutputStream().flush();
 

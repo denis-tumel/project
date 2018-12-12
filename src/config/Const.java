@@ -32,6 +32,7 @@ public class Const {
     public static final String PAID_SERVICES = "paidServices";
     public static final String SERVICES_ID = "services_id";
     static final String PATH_ORDER_CONFIRM = "../fxml/clientFXML/orderConfirmService.fxml";
+    static final String PATH_PIE = "../fxml/doctorFXML/pieChartView.fxml";
     static final String PATH_USERS_VIEW = "../fxml/adminFXML/viewUsers.fxml";
     static final String PATH_ADD_PAID_SERVICES = "../fxml/adminFXML/addPaidServices.fxml";
     static final String PATH_PAID_SERVICES = "../fxml/clientFXML/paidServicesView.fxml";
