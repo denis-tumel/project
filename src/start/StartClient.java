@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import model.ObjMessage;
 import objects.User;
+import utils.LocaleManager;
 
 import java.io.*;
 import java.net.*;
@@ -20,7 +21,9 @@ public class StartClient extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        LoaderStage.mainView(primaryStage);
+        LoaderStage loaderStage = new LoaderStage();
+        loaderStage.createGUI(LocaleManager.RU_LOCALE, primaryStage);
+        //LoaderStage.mainView(primaryStage);
     }
 
     public static void main(String[] args) {

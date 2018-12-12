@@ -36,6 +36,9 @@ public class MainController extends Observable implements Initializable {
             public void handle(ActionEvent event) {
                 Lang selectedLang = (Lang) comboBoxLocale.getSelectionModel().getSelectedItem();
                 LocaleManager.setCurrentLang(selectedLang);
+
+                setChanged();
+                notifyObservers(selectedLang);
             }
         });
     }
@@ -44,6 +47,7 @@ public class MainController extends Observable implements Initializable {
         Lang langRU = new Lang(0, RU_CODE, resourceBundle.getString("ru"), LocaleManager.RU_LOCALE);
         Lang langEN = new Lang(1, EN_CODE, resourceBundle.getString("en"), LocaleManager.EN_LOCALE);
 
+       // LocaleManager.setCurrentLang(langRU);
         comboBoxLocale.getItems().add(langRU);
         comboBoxLocale.getItems().add(langEN);
 

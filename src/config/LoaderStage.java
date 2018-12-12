@@ -6,9 +6,9 @@ import controller.clientControllers.*;
 import controller.doctorControllers.PieChartController;
 import controller.mainControllers.MainController;
 import javafx.collections.ObservableList;
-import objects.Doctor;
-import objects.OrderTicket;
-import objects.Service;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import objects.*;
 import start.StartClient;
 import controller.adminControllers.AdminController;
 import controller.doctorControllers.DoctorController;
@@ -19,14 +19,15 @@ import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import objects.User;
 import utils.LocaleManager;
 
 import java.io.IOException;
 import java.util.Locale;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.ResourceBundle;
 
-public class LoaderStage {
+public class LoaderStage implements Observer {
     private static AdminController adminController;
     private static EditDoctorController editDoctorController;
     private static DoctorController doctorController;
@@ -55,13 +56,47 @@ public class LoaderStage {
     private static Stage editDoctorStage;
     private static Stage viewStage;
     private static Stage viewPieStage;
-    LocaleManager localeManager = new LocaleManager();
+    private static AnchorPane anchorPane;
 
-    public static void mainView(Stage primaryStage) {
+    @Override
+    public void update(Observable o, Object arg) {
+        Lang lang = (Lang) arg;
+        AnchorPane newNode = loadFXML(lang.getLocale());
+        anchorPane.getChildren().setAll(newNode.getChildren());
+    }
+
+    private AnchorPane loadFXML(Locale locale) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(LoaderStage.class.getResource(Const.PATH_MAIN_VIEW));
+        loader.setResources(ResourceBundle.getBundle("bundles.Locale", locale));
+
+        AnchorPane node = null;
+
+        try {
+            node = (AnchorPane) loader.load();
+
+            mainController = loader.getController();
+            mainController.addObserver(this);
+            mainStage.setTitle(loader.getResources().getString("key.main.title"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return node;
+    }
+
+    public void createGUI(Locale locale, Stage primaryStage){
+        mainStage = primaryStage;
+        anchorPane = loadFXML(locale);
+        Scene scene = new Scene(anchorPane);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+/*    public static void mainView(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(LoaderStage.class.getResource(Const.PATH_MAIN_VIEW));
-            LocaleManager.getCurrentLang();
             loader.setResources(ResourceBundle.getBundle("bundles.Locale", new Locale("en")));
 
             root = loader.load();
@@ -77,14 +112,14 @@ public class LoaderStage {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public static void authenticationView() {
         try {
             if (authenticationStage == null) {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(LoaderStage.class.getResource(Const.PATH_AUTHENTICATION));
-                loader.setResources(ResourceBundle.getBundle("bundles.Locale", new Locale("en")));
+                loader.setResources(ResourceBundle.getBundle("bundles.Locale", LocaleManager.getCurrentLang().getLocale()));
                 root = loader.load();
                 scene = new Scene(root);
                 authenticationStage = new Stage();
@@ -108,7 +143,7 @@ public class LoaderStage {
             if (registrationStage == null) {
                 FXMLLoader loader = new FXMLLoader();
                 loader.setLocation(LoaderStage.class.getResource(Const.PATH_REGISTRATION));
-                loader.setResources(ResourceBundle.getBundle("bundles.Locale", new Locale("en")));
+                loader.setResources(ResourceBundle.getBundle("bundles.Locale", LocaleManager.getCurrentLang().getLocale()));
                 root = loader.load();
                 scene = new Scene(root);
                 registrationStage = new Stage();
@@ -495,4 +530,5 @@ public class LoaderStage {
     public static void setViewPieStage(Stage viewPieStage) {
         LoaderStage.viewPieStage = viewPieStage;
     }
+
 }
