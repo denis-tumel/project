@@ -314,8 +314,6 @@ public class DatabaseHandler extends Mysql {
 
                     preparedStatement.executeUpdate();
 
-                    saveInformationInFile(objMessage.getDoctorObject().getDay(), partOne+" : "+partTwo, objMessage.getUserObject().getFirstName(), objMessage.getDoctorObject().getNameDoctor(), objMessage.getDoctorObject().getSurnameDoctor(), objMessage.getDoctorObject().getSpecialty());
-
                     String selectedTicket = "SELECT " + Const.ORDER_COUPONE + ".day, " + Const.ORDER_COUPONE + ".time, " + Const.ORDER_COUPONE + ".user_id, " + Const.USERS_TABLE + ".name, " + Const.DOCTORS_TABLE + ".name, " + Const.DOCTORS_TABLE + ".surname, " + Const.DOCTORS_TABLE + ".specialty, " + Const.ORDER_COUPONE + ".numberTicket FROM " + Const.ORDER_COUPONE + " JOIN " + Const.USERS_TABLE + " ON " + Const.ORDER_COUPONE + ".user_id = " + Const.USERS_TABLE + ".id JOIN " + Const.DOCTORS_TABLE + " ON " + Const.ORDER_COUPONE + ".doctor_id = " + Const.DOCTORS_TABLE + ".id  WHERE " + Const.ORDER_COUPONE + ".user_id = ?";
 
                     preparedStatement = connect().prepareStatement(selectedTicket);
@@ -343,19 +341,6 @@ public class DatabaseHandler extends Mysql {
             e.printStackTrace();
         }
         return objMessage;
-    }
-
-    private static void saveInformationInFile(String day, String time, String firstName, String nameDoctor, String surnameDoctor, String specialty) {
-        int count = 0;
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("informationOrder.txt")))
-        {
-            count++;
-            String out = count+" день:" + day + ",\nвремя: " + time + ",\nдоктор: " + nameDoctor + " " + surnameDoctor + " (" + specialty + ")\n";
-            writer.append(out);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public static ArrayList<OrderTicket> getTicket(ObjMessage objMessage) {

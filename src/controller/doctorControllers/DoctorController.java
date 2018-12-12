@@ -1,7 +1,9 @@
 package controller.doctorControllers;
 
+import config.Const;
 import config.LoaderStage;
 import interfacese.impls.CollectionOrderTicket;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -10,6 +12,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import objects.OrderTicket;
 import objects.User;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class DoctorController {
     @FXML
@@ -49,4 +55,21 @@ public class DoctorController {
         helloLabel.setText("Привет: "+user.getFirstName());
     }
 
+    public void ActionSave(ActionEvent actionEvent) {
+        saveInformationInFile(tableOrderView.getItems());
+    }
+
+    private void saveInformationInFile(ObservableList<OrderTicket> items) {
+        int count = 0;
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(Const.INFO_FILE, true)))
+        {
+            for(OrderTicket orderTicket : items){
+                count++;
+                String out = count+" день:" + orderTicket.getDay() + ",\nвремя: " + orderTicket.getTime() + ",\nпользователь: " + orderTicket.getUser() + " \n";
+                writer.append(out);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -23,6 +23,7 @@ public class Const {
     public static final String USERS_SPECIALTY = "specialty";
     public static final String SERVICES_TABLE = "services";
     public static final String SERVICES_PRICE = "price";
+    public static final String INFO_FILE = "informationOrder.txt";
     public static final String HOST = "127.0.0.1";
     public static final int PORT = 2525;
     public static final int BLOCK_USERS = -1;

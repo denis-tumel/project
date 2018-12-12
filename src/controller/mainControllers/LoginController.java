@@ -68,11 +68,13 @@ public class LoginController implements Validation {
                         LoaderStage.getAuthenticationStage().close();
                         viewClientStage(user , "login");
                         showInformation();
+                        clearField();
                         break;
                     case 3:
                         LoaderStage.getAuthenticationStage().close();
                         viewDoctorStage(user);
                         showInformation();
+                        clearField();
                         break;
                     case -1:
                         viewBlockException(user);
