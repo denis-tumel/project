@@ -17,18 +17,18 @@
          </font></Label>
       <TableView fx:id="tableViewServices" layoutX="32.0" layoutY="118.0" prefHeight="233.0" prefWidth="208.0">
         <columns>
-          <TableColumn fx:id="service" prefWidth="75.0" text="услуга" />
-          <TableColumn fx:id="doctor" prefWidth="75.0" text="доктор" />
-            <TableColumn fx:id="price" prefWidth="75.0" text="цена" />
+          <TableColumn fx:id="service" prefWidth="75.0" text="Услуга" />
+          <TableColumn fx:id="doctor" prefWidth="75.0" text="Врач" />
+            <TableColumn fx:id="price" prefWidth="75.0" text="Цена" />
         </columns>
          <columnResizePolicy>
             <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
          </columnResizePolicy>
       </TableView>
-      <Button layoutX="320.0" layoutY="318.0" mnemonicParsing="false" onAction="#ActionConfirm" text="оформить" />
-      <ComboBox fx:id="day" layoutX="281.0" layoutY="118.0" prefWidth="150.0" promptText="день" />
-      <ComboBox fx:id="time" layoutX="281.0" layoutY="188.0" prefWidth="150.0" promptText="время" />
+      <Button layoutX="320.0" layoutY="318.0" mnemonicParsing="false" onAction="#ActionConfirm" text="Оформить" />
+      <ComboBox fx:id="day" layoutX="281.0" layoutY="118.0" prefWidth="150.0" promptText="Дата:" />
+      <ComboBox fx:id="time" layoutX="281.0" layoutY="188.0" prefWidth="150.0" promptText="Время:" />
       <Separator layoutX="131.0" layoutY="66.0" prefWidth="200.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="66.0" />
-      <Label layoutX="94.0" layoutY="84.0" text="выбор услуги" />
+      <Label layoutX="94.0" layoutY="84.0" text="Выбор услуги" />
    </children>
 </AnchorPane>

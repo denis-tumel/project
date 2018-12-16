@@ -376,7 +376,6 @@ public class DatabaseHandler extends Mysql {
     }
 
     public static void updateAll() {
-
         try {
             String sql = "DELETE FROM " + Const.ORDER_COUPONE;
             preparedStatement = connect().prepareStatement(sql);
@@ -391,7 +390,6 @@ public class DatabaseHandler extends Mysql {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
     public static ArrayList<OrderTicket> viewTicket(ObjMessage objMessage) {
@@ -487,8 +485,6 @@ public class DatabaseHandler extends Mysql {
 
     public static void orderService(ObjMessage objMessage) {
         try {
-            System.out.println("я тут");
-            System.out.println(objMessage.getDoctorObject().getDay());
             String sql;
             sql = "INSERT INTO " + Const.PAID_SERVICES + "( " + Const.SERVICES_ID+ ", " + Const.ORDER_DAY + ", " + Const.ORDER_TIME + ", " + Const.ORDER_USER_ID + ") " +
                     " VALUES ( ? , ? , ? , ? ) ";

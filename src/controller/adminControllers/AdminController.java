@@ -53,7 +53,8 @@ public class AdminController implements Observer {
     }
 
     public void setInformation(User user) {
-        helloLabel.setText("Привет: "+user.getFirstName());
+        if(user != null)
+            helloLabel.setText("Привет: "+user.getFirstName());
     }
 
     public void ActionButtonPressed(ActionEvent actionEvent){

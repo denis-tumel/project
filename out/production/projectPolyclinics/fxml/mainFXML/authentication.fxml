@@ -16,7 +16,7 @@
                <font>
                   <Font name="Sitka Small" size="12.0" />
                </font></Button>
-            <TextField id="text-field" fx:id="emailField" layoutX="221.0" layoutY="149.0" prefHeight="45.0" prefWidth="245.0" promptText="%key.main.email" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="204.0" />
+            <TextField id="text-field" fx:id="emailField" layoutX="221.0" layoutY="149.0" prefHeight="45.0" prefWidth="255.0" promptText="%key.main.email" AnchorPane.leftAnchor="221.0" AnchorPane.rightAnchor="194.0" />
             <Label layoutX="269.0" layoutY="82.0" prefHeight="53.0" prefWidth="160.0" text="%key.main.authorization" textAlignment="CENTER" textFill="#5bc2d0" AnchorPane.bottomAnchor="253.0" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="241.0" AnchorPane.topAnchor="82.0">
                <font>
                   <Font name="System Bold" size="24.0" />

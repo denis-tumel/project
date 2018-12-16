@@ -61,6 +61,7 @@ public class DoctorController {
 
     private void saveInformationInFile(ObservableList<OrderTicket> items) {
         int count = 0;
+
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Const.INFO_FILE, true))) {
             for (OrderTicket orderTicket : items) {
                 count++;

@@ -13,14 +13,12 @@ public class User implements Serializable {
     private String password;
     private int id;
     private int role;
-    private ArrayList<User> users = new ArrayList<User>();
 
     public User(String firstName, String lastName, String email, String password, String type) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        users.add(this);
         this.type = type;
     }
 
@@ -64,14 +62,6 @@ public class User implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public ArrayList<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(ArrayList<User> users) {
-        this.users = users;
     }
 
     public int getRole() {

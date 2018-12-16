@@ -22,12 +22,13 @@ public class MainController extends Observable implements Initializable {
     private ResourceBundle resourceBundle;
     private static final String RU_CODE = "ru";
     private static final String EN_CODE = "en";
+    private LoaderStage loaderStage = new LoaderStage();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         this.resourceBundle = resources;
-        fillLangComboBox();
         initListeners();
+        fillLangComboBox();
     }
 
     private void initListeners() {
@@ -47,10 +48,10 @@ public class MainController extends Observable implements Initializable {
         Lang langRU = new Lang(0, RU_CODE, resourceBundle.getString("ru"), LocaleManager.RU_LOCALE);
         Lang langEN = new Lang(1, EN_CODE, resourceBundle.getString("en"), LocaleManager.EN_LOCALE);
 
-       // LocaleManager.setCurrentLang(langRU);
         comboBoxLocale.getItems().add(langRU);
         comboBoxLocale.getItems().add(langEN);
 
+        //LocaleManager.setCurrentLang(langRU);
         if(LocaleManager.getCurrentLang() == null)
             comboBoxLocale.getSelectionModel().select(0);
         else
@@ -58,10 +59,15 @@ public class MainController extends Observable implements Initializable {
     }
 
     public void ActionLogin(ActionEvent actionEvent){
-        LoaderStage.authenticationView();
+        loaderStage.createAuthenticationGUI();
+        LoaderStage.getMainStage().close();
+        LoaderStage.getAuthenticationStage().show();
     }
 
     public void ActionRegister(ActionEvent actionEvent){
-        LoaderStage.registrationView();
+        loaderStage.createRegistrationGUI();
+        LoaderStage.getMainStage().close();
+        loaderStage.createRegistrationGUI();
+        LoaderStage.getRegistrationStage().show();
     }
 }

@@ -8,7 +8,7 @@
 <AnchorPane prefHeight="359.0" prefWidth="315.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.adminControllers.EditDoctorController">
    <children>
       <Label layoutX="86.0" layoutY="44.0" text="Имя" />
-      <Label layoutX="64.0" layoutY="88.0" text="Фмилия" />
+      <Label layoutX="64.0" layoutY="88.0" text="Фамилия" />
       <Label layoutX="22.0" layoutY="136.0" text="Специальность" />
       <Label layoutX="74.0" layoutY="180.0" text="E-mail" />
       <Label layoutX="65.0" layoutY="228.0" text="Пароль" />

@@ -7,6 +7,8 @@ import controller.doctorControllers.PieChartController;
 import controller.mainControllers.MainController;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import objects.*;
 import start.StartClient;
@@ -57,15 +59,65 @@ public class LoaderStage implements Observer {
     private static Stage viewStage;
     private static Stage viewPieStage;
     private static AnchorPane anchorPane;
+    private static VBox vBox;
+    private static Pane pane;
+    private static BorderPane borderPane;
 
     @Override
     public void update(Observable o, Object arg) {
         Lang lang = (Lang) arg;
-        AnchorPane newNode = loadFXML(lang.getLocale());
-        anchorPane.getChildren().setAll(newNode.getChildren());
+        AnchorPane anchorMain = loadMainFXML(lang.getLocale());
+        anchorPane.getChildren().setAll(anchorMain.getChildren());
+
+        createAuthenticationGUI();
+        VBox vBoxAuthentication = loadAuthenticationFXML(lang.getLocale());
+        vBox.getChildren().setAll(vBoxAuthentication.getChildren());
+
+        createRegistrationGUI();
+        Pane paneRegistration = loadRegistrationFXML(lang.getLocale());
+        vBox.getChildren().setAll(paneRegistration.getChildren());
+
+        createAdminGUI(null);
+        BorderPane borderPaneAdmin = loadAdminFXML(lang.getLocale(), null);
+        borderPane.getChildren().setAll(borderPaneAdmin.getChildren());
+
     }
 
-    private AnchorPane loadFXML(Locale locale) {
+    private Pane loadRegistrationFXML(Locale locale) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(LoaderStage.class.getResource(Const.PATH_REGISTRATION));
+        loader.setResources(ResourceBundle.getBundle("bundles.Locale", locale));
+
+        Pane node = null;
+
+        try {
+            node = (Pane) loader.load();
+            registrationStage.setTitle(loader.getResources().getString("key.main.register"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        eventCloseClient(registrationStage);
+        return node;
+    }
+
+    private VBox loadAuthenticationFXML(Locale locale) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(LoaderStage.class.getResource(Const.PATH_AUTHENTICATION));
+        loader.setResources(ResourceBundle.getBundle("bundles.Locale", locale));
+
+        VBox node = null;
+
+        try {
+            node = (VBox) loader.load();
+            authenticationStage.setTitle(loader.getResources().getString("key.main.authorization"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        eventCloseClient(authenticationStage);
+        return node;
+    }
+
+    private AnchorPane loadMainFXML(Locale locale) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(LoaderStage.class.getResource(Const.PATH_MAIN_VIEW));
         loader.setResources(ResourceBundle.getBundle("bundles.Locale", locale));
@@ -81,18 +133,94 @@ public class LoaderStage implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        eventCloseClient(mainStage);
         return node;
     }
 
-    public void createGUI(Locale locale, Stage primaryStage){
-        mainStage = primaryStage;
-        anchorPane = loadFXML(locale);
-        Scene scene = new Scene(anchorPane);
-        mainStage.setScene(scene);
-        mainStage.show();
+    private BorderPane loadAdminFXML(Locale locale, User user) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(LoaderStage.class.getResource(Const.PATH_ADMIN_STAGE));
+        loader.setResources(ResourceBundle.getBundle("bundles.Locale", locale));
+
+        BorderPane node = null;
+
+        try {
+            node = (BorderPane) loader.load();
+            adminController = loader.getController();
+            adminController.setInformation(user);
+            adminStage.setTitle(loader.getResources().getString("key.admin.title"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        eventCloseClient(adminStage);
+        return node;
     }
 
+    private BorderPane loadClientFXML(Locale locale, User user) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(LoaderStage.class.getResource(Const.PATH_CLIENT_VIEW));
+        loader.setResources(ResourceBundle.getBundle("bundles.Locale", locale));
+
+        BorderPane node = null;
+
+        try {
+            node = (BorderPane) loader.load();
+            clientController = loader.getController();
+            clientController.setInformation(user);
+            clientStage.setTitle(loader.getResources().getString("key.client.title"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        eventCloseClient(clientStage);
+        return node;
+    }
+
+    private BorderPane loadDoctorFXML(Locale locale, User user) {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(LoaderStage.class.getResource(Const.PATH_DOCTOR_STAGE));
+        loader.setResources(ResourceBundle.getBundle("bundles.Locale", locale));
+
+        BorderPane node = null;
+
+        try {
+            node = (BorderPane) loader.load();
+            doctorController = loader.getController();
+            doctorController.setInformation(user);
+            doctorStage.setTitle(loader.getResources().getString("key.doctor.title"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        eventCloseClient(doctorStage);
+        return node;
+    }
+
+    public void createRegistrationGUI() {
+        registrationStage = new Stage();
+        pane = loadRegistrationFXML(LocaleManager.getCurrentLang().getLocale());
+        Scene scene = new Scene(pane);
+        registrationStage.setScene(scene);
+    }
+
+    public void createAuthenticationGUI(){
+        authenticationStage = new Stage();
+        vBox = loadAuthenticationFXML(LocaleManager.getCurrentLang().getLocale());
+        Scene scene = new Scene(vBox);
+        authenticationStage.setScene(scene);
+    }
+
+    public void createAdminGUI(User user){
+        adminStage = new Stage();
+        borderPane = loadAdminFXML(LocaleManager.getCurrentLang().getLocale(), user);
+        Scene scene = new Scene(borderPane);
+        adminStage.setScene(scene);
+    }
+
+    public void createMainGUI(Locale locale, Stage primaryStage){
+        mainStage = primaryStage;
+        anchorPane = loadMainFXML(locale);
+        Scene scene = new Scene(anchorPane);
+        mainStage.setScene(scene);
+    }
 /*    public static void mainView(Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -114,7 +242,7 @@ public class LoaderStage implements Observer {
         }
     }*/
 
-    public static void authenticationView() {
+/*    public static void authenticationView() {
         try {
             if (authenticationStage == null) {
                 FXMLLoader loader = new FXMLLoader();
@@ -136,9 +264,9 @@ public class LoaderStage implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    public static void registrationView() {
+/*    public static void registrationView() {
         try {
             if (registrationStage == null) {
                 FXMLLoader loader = new FXMLLoader();
@@ -160,9 +288,9 @@ public class LoaderStage implements Observer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
-    public static void adminStageView(User user) {
+/*    public static void adminStageView(User user) {
         FXMLLoader loader = new FXMLLoader();
         try {
             if (adminStage == null) {
@@ -171,7 +299,7 @@ public class LoaderStage implements Observer {
                 scene = new Scene(root);
                 adminStage = new Stage();
                 setAdminStage(adminStage);
-                adminStage.setTitle("Админ");
+                adminStage.setTitle(loader.getResources().getString("key.admin.title"));
                 adminStage.setMinWidth(826);
                 adminStage.setMinHeight(655);
                 adminStage.setScene(scene);
@@ -183,6 +311,30 @@ public class LoaderStage implements Observer {
             authenticationStage.hide();
             adminStage.show();
             eventCloseClient(adminStage);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+
+    public static void doctorStageView(User user) {
+        FXMLLoader loader = new FXMLLoader();
+        try {
+            if (doctorStage == null) {
+                loader.setLocation(LoaderStage.class.getResource(Const.PATH_DOCTOR_STAGE));
+                root = loader.load();
+                scene = new Scene(root);
+                doctorStage = new Stage();
+                setDoctorStage(doctorStage);
+                doctorStage.setTitle("Страница доктора");
+                doctorStage.setScene(scene);
+                doctorStage.initModality(Modality.WINDOW_MODAL);
+                doctorStage.initOwner(mainStage);
+                doctorController = (DoctorController) loader.getController();
+            }
+            doctorController.setInformation(user);
+            authenticationStage.hide();
+            doctorStage.show();
+            eventCloseClient(doctorStage);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -210,31 +362,6 @@ public class LoaderStage implements Observer {
             e.printStackTrace();
         }
     }
-
-    public static void doctorStageView(User user) {
-        FXMLLoader loader = new FXMLLoader();
-        try {
-            if (doctorStage == null) {
-                loader.setLocation(LoaderStage.class.getResource(Const.PATH_DOCTOR_STAGE));
-                root = loader.load();
-                scene = new Scene(root);
-                doctorStage = new Stage();
-                setDoctorStage(doctorStage);
-                doctorStage.setTitle("Страница доктора");
-                doctorStage.setScene(scene);
-                doctorStage.initModality(Modality.WINDOW_MODAL);
-                doctorStage.initOwner(mainStage);
-                doctorController = (DoctorController) loader.getController();
-            }
-            doctorController.setInformation(user);
-            authenticationStage.hide();
-            doctorStage.show();
-            eventCloseClient(doctorStage);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void clientStageView(User user, String type) {
         FXMLLoader loader = new FXMLLoader();
         try {

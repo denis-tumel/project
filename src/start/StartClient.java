@@ -5,13 +5,12 @@ import config.LoaderStage;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import model.ObjMessage;
+import objects.Lang;
 import objects.User;
 import utils.LocaleManager;
 
 import java.io.*;
 import java.net.*;
-import java.util.Observable;
-import java.util.Observer;
 
 public class StartClient extends Application {
 
@@ -22,8 +21,10 @@ public class StartClient extends Application {
     @Override
     public void start(Stage primaryStage){
         LoaderStage loaderStage = new LoaderStage();
-        loaderStage.createGUI(LocaleManager.RU_LOCALE, primaryStage);
-        //LoaderStage.mainView(primaryStage);
+        Lang langRU = new Lang(0, "ru", "Русский", LocaleManager.RU_LOCALE);
+        LocaleManager.setCurrentLang(langRU);
+        loaderStage.createMainGUI(LocaleManager.RU_LOCALE, primaryStage);
+        LoaderStage.getMainStage().show();
     }
 
     public static void main(String[] args) {

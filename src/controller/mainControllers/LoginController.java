@@ -25,6 +25,7 @@ public class LoginController implements Validation {
     public AnchorPane registerLabel;
 
     private User user;
+    private LoaderStage loaderStage = new LoaderStage();
 
     public void ActionLogin(ActionEvent actionEvent) {
         if (validate()) {
@@ -105,7 +106,8 @@ public class LoginController implements Validation {
     }
 
     private void viewAdminStage(User user) {
-        LoaderStage.adminStageView(user);
+        loaderStage.createAdminGUI(user);
+        LoaderStage.getAdminStage().show();
     }
 
     void viewClientStage(User user, String type) {
@@ -135,7 +137,7 @@ public class LoginController implements Validation {
     }
 
     public void ActionRegister(ActionEvent actionEvent) {
-        new MainController().ActionRegister(actionEvent);
         LoaderStage.getAuthenticationStage().close();
+        new MainController().ActionRegister(actionEvent);
     }
 }
